@@ -9,7 +9,16 @@ class display:
         self.host = '192.168.0.32'
         self.port = 5001        
         self.client_socket = socket.socket()
-        self.client_socket.connect((self.host, self.port))
+        while 1:
+            try:
+                print('trying connecting to server')
+                self.client_socket.connect((self.host, self.port))
+                break
+            except:
+                sleep(3)
+                pass            
+        
+        self.init_conn()
         self.text_queue1 = []
         self.text_queue2 = []
         self.delete_id = []
@@ -17,6 +26,22 @@ class display:
         while 1:
             self.get_message()
             sleep(1)
+        
+    def init_conn(self):
+        i2cbus = SMBus(1)
+        oled = ssd1306(i2cbus)
+        
+        img = Image.open('left_arr.png')
+        draw_text = 'Connected'
+        
+        font = ImageFont.truetype("Car_Num.ttf", 45)
+        draw = ImageDraw.Draw(img)
+        draw.text((64, 0), draw_text, 'black', font)
+        
+        logo = img.resize((128,32)).convert('1')
+        oled.canvas.bitmap((0,0), logo, fill = 1)
+        
+        oled.display()
         
     def connection(self):
         msg = '00'
@@ -85,8 +110,6 @@ class display:
         img = Image.open(file_name)
         draw_text = text1[1]
         
-        
-            
         font = ImageFont.truetype("Car_Num.ttf", 45)
         draw = ImageDraw.Draw(img)
         draw.text((64, 0), draw_text, 'black', font)
