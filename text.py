@@ -49,19 +49,19 @@ class Display:
 
     def select_disp(self, disp_num):
         if disp_num == 1:
-            self.tca_set(0b0000001)
+            self.tca_set(0b00000001)
         elif disp_num == 2:
-            self.tca_set(0b0000010)
+            self.tca_set(0b00000010)
         elif disp_num == 3:
-            self.tca_set(0b0000100)
+            self.tca_set(0b00000100)
         elif disp_num == 4:
-            self.tca_set(0b0001000)
+            self.tca_set(0b00001000)
         elif disp_num == 5:
-            self.tca_set(0b0010000)
+            self.tca_set(0b00010000)
         elif disp_num == 6:
-            self.tca_set(0b0100000)
+            self.tca_set(0b00100000)
         else:
-            self.tca_set(0b0000111)
+            self.tca_set(0b00111111)
 
     def connection(self):
         msg = '00'
@@ -75,21 +75,34 @@ class Display:
         data = data.split('/', 10)
         print(data)
         
+        #disp1
+#         if data[0] == '':
+#             return False
+#         if data[2] == '3A':
+#             self.tca_set(1)
+#         elif data[2] == '3B':
+#             self.tca_set(2)
+#         elif data[2] == '9A':
+#             self.tca_set(3)
+#         elif data[2] == '9B':
+#             self.tca_set(4)
+#         elif data[2] == '11A':
+#             self.tca_set(5)
+#         elif data[2] == '11B':
+#             self.tca_set(6)
+
+        # disp 2
         if data[0] == '':
             return False
-        if data[2] == '3A':
+        if data[2] == '13A':
             self.tca_set(1)
-        elif data[2] == '3B':
+        elif data[2] == '13B':
             self.tca_set(2)
-        elif data[2] == '9A':
+        elif data[2] == '19A':
             self.tca_set(3)
-        elif data[2] == '9B':
+        elif data[2] == '19B':
             self.tca_set(4)
-        elif data[2] == '11A':
-            self.tca_set(5)
-        elif data[2] == '11B':
-            self.tca_set(6)
-
+            
         if data[0] == '0':
         # 0 two times => delete oled
             pass
