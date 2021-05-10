@@ -132,7 +132,7 @@ class Display:
         flip1 = img.transpose(Image.FLIP_LEFT_RIGHT)
         result = flip1.transpose(Image.FLIP_TOP_BOTTOM)
 
-        img.save('fuck.png')
+        img.save('test.png')
 
         displaying = result.resize((128,32)).convert('1')
         self.oled.canvas.bitmap((0,32), displaying, fill = 1)
